@@ -47,13 +47,11 @@ export default class Cart {
   }
 
   isEmpty() {
-    // СКОПИРУЙТЕ СЮДЯ СВОЙ КОД
     if (this.cartItems.length < 1) return true
     else return false
   }
 
   getTotalCount() {
-    // СКОПИРУЙТЕ СЮДЯ СВОЙ КОД
     let totalCount = 0
     for (let item of this.cartItems) {
       totalCount += item.count
@@ -62,7 +60,6 @@ export default class Cart {
   }
 
   getTotalPrice() {
-    // СКОПИРУЙТЕ СЮДЯ СВОЙ КОД
     let totalPrice = 0
     for (let item of this.cartItems) {
       totalPrice += item.count*item.product.price
@@ -76,18 +73,18 @@ export default class Cart {
       product.id
     }">
       <div class="cart-product__img">
-        <img src="/assets/images/products/${product.image}" alt="product">
+        <img src="./assets/images/products/${product.image}" alt="product">
       </div>
       <div class="cart-product__info">
         <div class="cart-product__title">${escapeHtml(product.name)}</div>
         <div class="cart-product__price-wrap">
           <div class="cart-counter">
             <button type="button" class="cart-counter__button cart-counter__button_minus">
-              <img src="/assets/images/icons/square-minus-icon.svg" alt="minus">
+              <img src="./assets/images/icons/square-minus-icon.svg" alt="minus">
             </button>
             <span class="cart-counter__count">${count}</span>
             <button type="button" class="cart-counter__button cart-counter__button_plus">
-              <img src="/assets/images/icons/square-plus-icon.svg" alt="plus">
+              <img src="./assets/images/icons/square-plus-icon.svg" alt="plus">
             </button>
           </div>
           <div class="cart-product__price">€${product.price.toFixed(2)}</div>
@@ -129,11 +126,7 @@ export default class Cart {
       this.modalBody.append(this.renderOrderForm())
       this.modalBody.addEventListener("click", this.onModalBodyClick);
       this.modal.setBody(this.modalBody)
-      // when modal is closed, we forget about it, don't update it any more
-      // this.modal.elem.addEventListener('modal-close', () => {
-      //   this.modal = null;
-      //   this.modalBody = null;
-      // });
+
       this.modal.open();
   }
   onModalBodyClick = (event) => {
@@ -150,7 +143,6 @@ export default class Cart {
 
 
   onProductUpdate({product, count}) {
-    // ...ваш код
     this.cartIcon.update(this);
     if (!this.modal || !document.body.classList.contains('is-modal-open')) {
       return;
