@@ -35,9 +35,10 @@ render(){
     this.#modal = createElement(this.#html())
 }
 open() {
-  document.querySelector('body').append(this.#modal)
-  document.querySelector('body').classList.add('is-modal-open')
-  this.#modal.querySelector('.modal__close').addEventListener('click', () => this.close())
+  document.body.append(this.#modal)
+  document.body.classList.add('is-modal-open')
+
+  this.#modal.addEventListener('click', (event) => this.onClick(event))
   document.addEventListener('keydown', this.escape)
 }
 setTitle (title){
@@ -49,13 +50,20 @@ setBody (node) {
   modalBody.append(node)
 }
 close(){
-  this.#modal.remove()
-  document.querySelector('body').classList.remove('is-modal-open')
+  document.removeEventListener('keydown', this.escape);
+  this.#modal.remove();
+  document.body.classList.remove('is-modal-open')
+}
+onClick(event) {
+  if (event.target.closest('.modal__close')){
+    event.preventDefault();
+    this.close();
+  } 
 }
 escape = (event) => {
   if (event.code === 'Escape') {
-    this.#modal.remove()
-    document.querySelector('body').classList.remove('is-modal-open')
+    event.preventDefault();
+    this.close()
   }
 }
 }
